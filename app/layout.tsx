@@ -1,6 +1,9 @@
+// app/layout.tsx
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import QueryProvider from "@/components/providers/QueryProvider";
+import { Toaster } from "react-hot-toast";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,11 +26,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
+    <html lang="ko">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <QueryProvider>
+          {children}
+          {/* Toast 알림을 위한 Toaster 추가 */}
+          <Toaster position="bottom-center" />
+        </QueryProvider>
       </body>
     </html>
   );
